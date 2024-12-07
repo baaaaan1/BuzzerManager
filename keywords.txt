@@ -1,0 +1,3 @@
+BuzzerManager	KEYWORD1
+beep	KEYWORD2
+update	KEYWORD2
