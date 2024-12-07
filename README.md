@@ -1,4 +1,6 @@
 # BuzzerManager Library
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/baaaaan1/BuzzerManager)
+![GitHub](https://img.shields.io/github/license/baaaaan1/BuzzerManager)
 
 **BuzzerManager** is an Arduino library for controlling buzzers with flexible and non-blocking beep patterns. This library is ideal for projects that require independent control of multiple buzzers or specific beep sequences.
 
