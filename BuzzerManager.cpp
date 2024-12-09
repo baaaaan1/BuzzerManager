@@ -13,7 +13,7 @@ BuzzerManager::BuzzerManager(int pin) {
   _active = false;
 }
 
-void BuzzerManager::beep(int count, int duration, int pause) {
+void BuzzerManager::beep(int count, int duration, int pause, bool state) {
   _beepCount = count;
   _duration = duration;
   _pause = pause;
@@ -21,7 +21,12 @@ void BuzzerManager::beep(int count, int duration, int pause) {
   _currentBeep = 0;
   _previousMillis = 0;
   _isBeeping = false;
-  _active = true;
+  
+  if (state) {
+    _active = true;
+  } else {
+    _active = false;
+  }
 }
 
 void BuzzerManager::update() {

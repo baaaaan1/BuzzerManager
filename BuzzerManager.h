@@ -6,7 +6,7 @@
 class BuzzerManager {
   public:
     BuzzerManager(int pin);
-    void beep(int count, int duration, int pause);
+    void beep(int count, int duration, int pause, bool state);
     void update(); // Harus dipanggil dalam loop()
 
   private:
