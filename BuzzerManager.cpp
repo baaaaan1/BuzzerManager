@@ -3,8 +3,8 @@
 BuzzerManager::BuzzerManager(int pin) {
   _pin = pin;
   pinMode(_pin, OUTPUT);
+  digitalWrite(_pin, LOW); // Pastikan buzzer mati di awal
   _beepCount = 0;
-  _frequency = 0;
   _duration = 0;
   _pause = 0;
   _currentBeep = 0;
@@ -13,9 +13,8 @@ BuzzerManager::BuzzerManager(int pin) {
   _active = false;
 }
 
-void BuzzerManager::beep(int count, int frequency, int duration, int pause) {
+void BuzzerManager::beep(int count, int duration, int pause) {
   _beepCount = count;
-  _frequency = frequency;
   _duration = duration;
   _pause = pause;
 
@@ -34,23 +33,22 @@ void BuzzerManager::update() {
     if (!_isBeeping) {
       // Mulai beep jika jeda selesai
       if (currentMillis - _previousMillis >= _pause || _currentBeep == 0) {
-        tone(_pin, _frequency, _duration);
+        digitalWrite(_pin, HIGH); // Hidupkan buzzer
         _previousMillis = currentMillis;
         _isBeeping = true;
       }
     } else {
       // Matikan beep jika durasi selesai
       if (currentMillis - _previousMillis >= _duration) {
-        noTone(_pin);
+        digitalWrite(_pin, LOW); // Matikan buzzer
         _previousMillis = currentMillis;
         _isBeeping = false;
         _currentBeep++;
       }
     }
   } else {
-    // Semua beep selesai
+    // Stop
     _active = false;
-    noTone(_pin); // Pastikan buzzer mati
+    digitalWrite(_pin, LOW); // Pastikan buzzer mati
   }
 }
-
