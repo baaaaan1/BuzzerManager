@@ -31,17 +31,26 @@ void BuzzerManager::update() {
   unsigned long currentMillis = millis();
 
   if (_currentBeep < _beepCount) {
-    if (!_isBeeping && (currentMillis - _previousMillis >= _pause)) {
-      tone(_pin, _frequency, _duration);
-      _previousMillis = currentMillis;
-      _isBeeping = true;
-    } else if (_isBeeping && (currentMillis - _previousMillis >= _duration)) {
-      noTone(_pin);
-      _previousMillis = currentMillis;
-      _isBeeping = false;
-      _currentBeep++;
+    if (!_isBeeping) {
+      // Mulai beep jika jeda selesai
+      if (currentMillis - _previousMillis >= _pause || _currentBeep == 0) {
+        tone(_pin, _frequency, _duration);
+        _previousMillis = currentMillis;
+        _isBeeping = true;
+      }
+    } else {
+      // Matikan beep jika durasi selesai
+      if (currentMillis - _previousMillis >= _duration) {
+        noTone(_pin);
+        _previousMillis = currentMillis;
+        _isBeeping = false;
+        _currentBeep++;
+      }
     }
   } else {
-    _active = false; // Selesai, nonaktifkan
+    // Semua beep selesai
+    _active = false;
+    noTone(_pin); // Pastikan buzzer mati
   }
 }
+
