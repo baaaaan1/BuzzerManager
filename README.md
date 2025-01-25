@@ -21,3 +21,21 @@
 
 const int buzzerPin = 9;  // Pin connected to the buzzer
 BuzzerManager buzzer(buzzerPin);
+```
+
+### Beeping
+```cpp
+buzzer.beep(5, 1000, 500, true); // Beep 5 times, 1 second duration, 0.5 second pause, buzzer on
+```
+
+### Update Loop
+```cpp
+void loop() {
+    buzzer.update(); // Call this in the loop to manage buzzer state
+}
+```
+
+### Suggested Use Cases
+- **Alarm Systems**: Use multiple buzzers for different alarm signals.
+- **Toys**: Create sound effects for interactive toys.
+- **Indicators**: Use buzzers as indicators for various events in your project.
